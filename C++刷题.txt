@@ -1,0 +1,129 @@
+STL 快速入门
+from:肥颖
+1. vector数组
+    头文件： #include<vector>
+    操作：
+    （一）定义：
+        1.一维数组
+            vector<int> nums;//初始化一个数组
+            vector<int> nums(n);//初始化一个数组，大小为n，每个位置初始化为0
+            vector<int> nums(n,0); //初始化一个数组，大小为n，每个位置初始化为0
+            vector<int> nums2(nums1);//初始化一个数组，内容为nums1的副本
+        2.二维数组
+            vector<vector<int>> nums(n,vector<int>(m));//初始化一个n*m的二维数组
+    （二）基本操作
+        1.nums.empty() //判断为空
+        2.nums.size() //返回长度
+        3.nums.push_back(1) //向尾部压入一个值
+        4.nums.pop_back()//删除尾部元素
+        5.nums.erase(nums.begin()+i,nums.end()-k)//删除迭代器1和2之间的元素
+        6.nums.clear()//清空
+        7.nums.insert(nums.begin()+i,k)//在第i个位置插入元素k
+        8.合并两个vector nums2.insert(nums2.end(),nums1.begin(),nums1.end())
+    （三）访问操作
+        1.按索引访问
+        for(int i = 0;i<nums.size();i++){
+            cout<<nums[i]<<endl;
+        }          
+        2.auto的方法访问
+        for(auto &n:nums){
+            cout<<n<<endl;
+        }    
+        3.迭代器
+        for(vector<int>::iterator iter = nums.begin();iter!=nums.end();iter++){
+            cout<<*iter<<endl;
+        }   
+
+
+2. set
+    set跟vector差不多，它跟vector的唯一区别就是，set里面的元素是有序的且唯一的，只要你往set里添加元素，
+    它就会自动排序，而且，如果你添加的元素set里面本来就存在，那么这次添加操作就不执行。不排序的set叫unordered_set
+    头文件：
+        #include<set>
+        #include<unordered_set>
+    操作：与vector差不多，没有push_pack，直接insert即可
+
+
+3.list 双向链表
+    头文件：
+        #include <list>
+    操作：与vector差不多
+    值得注意的是，list容器不能调用algorithm下的sort函数进行排序，因为sort函数要求容器必须可以随机存储，而list做不到。
+    所以，list自己做了一个自己用的排序函数，用法如下：
+    list<int> l1{ 8,5,7,6,1,2,3,4,5,5,6,7,7 };
+    l1.sort();
+4. map/unordered_map （是否对key排序）
+    头文件：
+    #include <map>
+    #include <unordered_map>
+    （一）定义：
+    map<int,char> mp;
+    （二）基本操作
+    1.插入 mp.insert(make_pair(1,'a'));
+    或者 mp[1] = 'a';
+    2.删除 mp.erase(1)
+    3.查找
+    mp.find(1) != mp.end()
+    或者 mp.count(1)
+    3.按value排序
+    先转换为vector<pair>,然后用sort函数排序
+    例如：
+    static bool cmp(const pair<int,int>& a,const pair<int,int>& b){
+        return a.fisrt<=b.first;
+    }
+    vector<pair<int,int>> mp2;
+    for(auto &p:mp){
+        mp2.push_back(make_pair(p.first,p.second));
+    }
+    sort(mp2.begin(),mp2.end(),cmp);
+    （三）遍历
+    1.auto的方法访问
+    for(auto p:mp){
+        cout<<p->fisrt<<p->second<<endl;
+    }  
+    2.迭代器
+    for(map<int,int> iterator::it = mp.begin;it!=mp.end();it++){
+        cout<<it->first<<it->second<<endl;
+    }
+5.string
+    头文件：
+    #include <string>
+    基本操作:
+        与vector差不多
+    常用操作：
+        取子串:s.substr(s.begin()+i,s.begin()+j);
+
+6.stack
+    头文件：
+    #include <stack>
+    定义：
+        stack<int> st;
+    基本操作:
+        1.入栈 st.push(1);
+        2.取栈顶 st.top();
+        3.栈顶元素弹出,不返回元素 st.pop();
+        4.判断是否为空 st.empty();
+7.queue
+    头文件：
+    #include <queue>
+    定义：
+        queue<int> q;
+    基本操作:
+        1.入队 q.push(x);
+        2.访问队首元素 q.front();
+        3.访问队尾元素 q.back();
+        4.弹出队列的第一个元素,不返回元素 q.pop();
+        5.判断是否为空 q.empty();
+
+8.其他
+  auto是一个特别好用的东西,它会自动生成一个相同类型的元素
+  例如 auto t = st.top();
+  就是取栈顶元素
+
+
+
+
+
+
+
+        
